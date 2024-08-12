@@ -1,0 +1,17 @@
+*{
+  font-family: "candara";
+  scrollbar-color: silver #444;
+  scrollbar-width: thin;
+}
+
+#id-name, #id-lastname{
+  text-transform: uppercase;
+}
+
+#id-firstname{
+  text-transform: capitalize;
+}
+.cls-contact-user span[class*="text-"], .cls-tr-contact-user span[class*="text-"]{
+  cursor: pointer;
+}
+

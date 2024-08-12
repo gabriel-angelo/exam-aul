@@ -1,0 +1,245 @@
+<%-include('../inc/header');-%>
+<body>
+
+            <!-- THEME CONFIGURATION -->
+            <script>
+                let themeAttrs = document.documentElement.dataset;
+            
+                for(let attr in themeAttrs) {
+                    if(localStorage.getItem(attr) != null) {
+                        document.documentElement.dataset[attr] = localStorage.getItem(attr);
+            
+                        if (theme === 'auto') {
+                            document.documentElement.dataset.theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            
+                            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+                                e.matches ? document.documentElement.dataset.theme = 'dark' : document.documentElement.dataset.theme = 'light';
+                            });
+                        }
+                    }
+                }
+            </script>
+
+        <!-- MAIN CONTENT -->
+        <main>
+
+            <!-- HEADER -->
+            <header class="container-fluid d-flex py-6 mb-4">
+            
+                <!-- Search -->
+                <form class="d-none d-md-inline-block me-auto">
+                    <div class="input-group input-group-merge">
+            
+                        <!-- Input -->
+                        <input type="text" class="form-control bg-light-green border-light-green w-250px" placeholder="Search..." aria-label="Search for any term">
+                        
+                        <!-- Button -->
+                        <span class="input-group-text bg-light-green border-light-green p-0">
+            
+                            <!-- Button -->
+                            <button class="btn btn-primary rounded-2 w-30px h-30px p-0 mx-1" type="button" aria-label="Search button">
+                                <svg viewBox="0 0 24 24" height="16" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M0.750 9.812 A9.063 9.063 0 1 0 18.876 9.812 A9.063 9.063 0 1 0 0.750 9.812 Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" transform="translate(-3.056 4.62) rotate(-23.025)"  /><path d="M16.221 16.22L23.25 23.25" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/></svg>
+                            </button>
+                        </span>
+                      </div>
+                </form>
+            
+                <!-- Top buttons -->
+                <div class="d-flex align-items-center ms-auto me-n1 me-lg-n2">
+            
+            
+                    <!-- Button -->
+                    <a class="d-flex align-items-center justify-content-center bg-white rounded-circle shadow-sm mx-1 mx-lg-2 w-40px h-40px position-relative link-secondary" data-bs-toggle="offcanvas" href="#offcanvasNotifications" role="button" aria-controls="offcanvasNotifications">
+                        <svg viewBox="0 0 24 24" height="18" width="18" xmlns="http://www.w3.org/2000/svg"><path d="M10,21.75a2.087,2.087,0,0,0,4.005,0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><path d="M12 3L12 0.75" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><path d="M12,3a7.5,7.5,0,0,1,7.5,7.5c0,7.046,1.5,8.25,1.5,8.25H3s1.5-1.916,1.5-8.25A7.5,7.5,0,0,1,12,3Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/></svg>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill text-bg-danger">
+                            20+<span class="visually-hidden">unread messages</span>
+                        </span>
+                    </a>
+            
+                    <!-- Notifications offcanvas -->
+                    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNotifications" aria-labelledby="offcanvasNotificationsLabel">
+                        <div class="offcanvas-header px-5">
+                            <h3 class="offcanvas-title" id="offcanvasNotificationsLabel">Notifications</h3>
+                            
+                            <div class="d-flex align-items-start">
+                                <div class="dropdown">
+                                    <a href="javascript: void(0);" class="dropdown-toggle no-arrow w-20px h-20px me-2 text-body" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="16" width="16"><g><circle cx="3.25" cy="12" r="3.25" style="fill: currentColor"/><circle cx="12" cy="12" r="3.25" style="fill: currentColor"/><circle cx="20.75" cy="12" r="3.25" style="fill: currentColor"/></g></svg>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a class="dropdown-item" href="javascript: void(0);">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="me-2 text-secondary" height="14" width="14"><g><path d="M23.22,2.06a1.49,1.49,0,0,0-2,.59l-8.5,15.43L6.46,11.29a1.5,1.5,0,1,0-2.21,2l7.64,8.34a1.52,1.52,0,0,0,2.42-.29L23.81,4.1A1.5,1.5,0,0,0,23.22,2.06Z" style="fill: currentColor"/><path d="M2.61,14.63a1.5,1.5,0,0,0-2.22,2l4.59,5a1.52,1.52,0,0,0,2.11.09,1.49,1.49,0,0,0,.1-2.12Z" style="fill: currentColor"/><path d="M10.3,13a1.41,1.41,0,0,0,2-.54L16.89,4.1a1.5,1.5,0,1,0-2.62-1.45L9.68,11A1.41,1.41,0,0,0,10.3,13Z" style="fill: currentColor"/></g></svg>
+                                                Marquer tout comme lus
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="javascript: void(0);">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="me-2 text-secondary" height="14" width="14"><g><path d="M21.5,2.5H2.5a2,2,0,0,0-2,2v3a1,1,0,0,0,1,1h21a1,1,0,0,0,1-1v-3A2,2,0,0,0,21.5,2.5Z" style="fill: currentColor"/><path d="M21.5,10H2.5a1,1,0,0,0-1,1v8.5a2,2,0,0,0,2,2h17a2,2,0,0,0,2-2V11A1,1,0,0,0,21.5,10Zm-6.25,3.5A1.25,1.25,0,0,1,14,14.75H10a1.25,1.25,0,0,1,0-2.5h4A1.25,1.25,0,0,1,15.25,13.5Z" style="fill: currentColor"/></g></svg>
+                                                Archiver tout
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="javascript: void(0);">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="me-2 text-secondary" height="14" width="14"><g><path d="M21,19.5a1,1,0,0,0,0-2A1.5,1.5,0,0,1,19.5,16V11.14a8.65,8.65,0,0,0-.4-2.62l-11,11Z" style="fill: currentColor"/><path d="M14.24,21H9.76a.25.25,0,0,0-.24.22,2.64,2.64,0,0,0,0,.28,2.5,2.5,0,0,0,5,0,2.64,2.64,0,0,0,0-.28A.25.25,0,0,0,14.24,21Z" style="fill: currentColor"/><path d="M1,24a1,1,0,0,0,.71-.28l22-22a1,1,0,0,0,0-1.42,1,1,0,0,0-1.42,0l-5,5A7.31,7.31,0,0,0,13,3.07V1a1,1,0,0,0-2,0V3.07a8,8,0,0,0-6.5,8.07V16A1.5,1.5,0,0,1,3,17.5a1,1,0,0,0,0,2h.09L.29,22.29a1,1,0,0,0,0,1.42A1,1,0,0,0,1,24Z" style="fill: currentColor"/></g></svg>
+                                                Désactiver les notification
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <hr class="dropdown-divider">
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="javascript: void(0);">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="me-2 text-secondary" height="14" width="14"><g><rect x="4.25" y="4.5" width="5.75" height="7.25" rx="1.25" style="fill: currentColor"/><path d="M24,10a3,3,0,0,0-3-3H19V2.5a2,2,0,0,0-2-2H2a2,2,0,0,0-2,2V20a3.5,3.5,0,0,0,3.5,3.5h17A3.5,3.5,0,0,0,24,20ZM3.5,21.5A1.5,1.5,0,0,1,2,20V3a.5.5,0,0,1,.5-.5h14A.5.5,0,0,1,17,3V20a3.51,3.51,0,0,0,.11.87.5.5,0,0,1-.09.44.49.49,0,0,1-.39.19ZM22,20a1.5,1.5,0,0,1-3,0V9.5a.5.5,0,0,1,.5-.5H21a1,1,0,0,1,1,1Z" style="fill: currentColor"/><rect x="12" y="6.05" width="3.5" height="2" rx="0.75" style="fill: currentColor"/><rect x="12" y="10.05" width="3.5" height="2" rx="0.75" style="fill: currentColor"/><rect x="4" y="14.05" width="11.5" height="2" rx="0.75" style="fill: currentColor"/><rect x="4" y="18.05" width="9" height="2" rx="0.75" style="fill: currentColor"/></g></svg>                              
+                                                Quoi de neuf?
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                    
+                                <!-- Button -->
+                                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                            </div>
+                        </div>
+                    
+                        <div class="offcanvas-body p-0">
+                            <div class="list-group list-group-flush">
+                                <a href="javascript: void(0);" class="list-group-item list-group-item-action">
+                                    <div class="d-flex">
+                                        <div class="avatar avatar-circle avatar-xs me-2">
+                                            <img src="https://d33wubrfki0l68.cloudfront.net/5dfa4398a7f2beddbcfa617402e193f2f13aaa94/2ecb0/assets/images/profiles/profile-28.jpeg" alt="..." class="avatar-img" width="30" height="30">
+                                        </div>
+                        
+                                        <div class="d-flex flex-column flex-grow-1">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1">Daniel</h5>
+                                                <small class="text-muted">il y a 10 minutes</small>
+                                            </div>
+                        
+                                            <div class="d-flex flex-column">
+                                                <p class="mb-1">RE: Email sous d'information fiable</p>
+                                                <small class="text-secondary">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                                consequat.</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                        
+                                <a href="javascript: void(0);" class="list-group-item list-group-item-action">
+                                    <div class="d-flex">
+                                        <div class="avatar avatar-circle avatar-xs me-2">
+                                            <span class="avatar-title text-bg-info-soft">M</span>
+                                        </div>
+                        
+                                        <div class="d-flex flex-column flex-grow-1">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1">Larah Entreprise</h5>
+                                                <small class="text-muted">il y a 14 minutes</small>
+                                            </div>
+                        
+                                            <div class="d-flex flex-column">
+                                                <p class="mb-1">J.neu notify</p>
+                                                <small class="text-secondary">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Separator -->
+                    <div class="vr bg-gray-700 mx-2 mx-lg-3"></div>
+            
+                    <!-- Dropdown -->
+                    <div class="dropdown">
+                        <a href="javascript: void(0);" class="dropdown-toggle no-arrow d-flex align-items-center justify-content-center bg-white rounded-circle shadow-sm mx-1 mx-lg-2 w-40px h-40px" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false" data-bs-offset="0,0">
+                            <div class="avatar avatar-circle avatar-sm avatar-online">
+                                <img src="https://d33wubrfki0l68.cloudfront.net/053f2dfd0df2f52c41e903a21d177b0b44abc9b1/1282c/assets/images/profiles/profile-06.jpeg" alt="..." class="avatar-img" width="40" height="40">
+                            </div>
+                        </a>
+            
+                        <div class="dropdown-menu">
+                            <div class="dropdown-item-text">
+                                <div class="d-flex align-items-center">
+                                    <div class="avatar avatar-sm avatar-circle">
+                                        <img src="https://d33wubrfki0l68.cloudfront.net/053f2dfd0df2f52c41e903a21d177b0b44abc9b1/1282c/assets/images/profiles/profile-06.jpeg" alt="..." class="avatar-img" width="40" height="40">
+                                    </div>
+                                    <div class="flex-grow-1 ms-3">
+                                        <h4 class="mb-0">Ellie Tucker</h4>
+                                        <p class="card-text">ellie.tucker@dashly.com</p>
+                                    </div>
+                                </div>
+                            </div>
+            
+                            <hr class="dropdown-divider">
+            
+                            <!-- Dropdown -->
+                            <div class="dropdown dropend">
+                                <a class="dropdown-item dropdown-toggle" href="javascript: void(0);" id="statusDropdown" data-bs-toggle="dropdown" aria-expanded="false" data-bs-offset="-16,10">
+                                    Set status
+                                </a>
+            
+                                <div class="dropdown-menu dropdown-menu-end navbar-dropdown-menu navbar-dropdown-menu-borderless navbar-dropdown-sub-menu" aria-labelledby="statusDropdown">
+                                    <a class="dropdown-item" href="javascript: void(0);">
+                                        <span class="legend-circle bg-success me-2"></span>Available
+                                    </a>
+                                    <a class="dropdown-item" href="javascript: void(0);">
+                                        <span class="legend-circle bg-danger me-2"></span>Busy
+                                    </a>
+                                    <a class="dropdown-item" href="javascript: void(0);">
+                                        <span class="legend-circle bg-warning me-2"></span>Away
+                                    </a>
+                                    <a class="dropdown-item" href="javascript: void(0);">
+                                        <span class="legend-circle bg-gray-500 me-2"></span>Appear offline
+                                    </a>
+                                    <hr class="dropdown-divider">
+                                    <a class="dropdown-item" href="javascript: void(0);">
+                                        Reset status
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- End Dropdown -->
+            
+                            <a class="dropdown-item" href="javascript: void(0);">Profile & account</a>
+                            <a class="dropdown-item" href="javascript: void(0);">Settings</a>
+            
+                            <hr class="dropdown-divider">
+            
+                            <a class="dropdown-item" href="javascript: void(0);">Sign out</a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <div class="container-fluid">
+
+                <!-- Card -->
+                <div class="card border-0">
+                    <div class="card-body py-7" id="ngmap-id" style="height:calc(100vh - 12rem);">
+                        <div class="row justify-content-center"></div> <!-- / .row -->
+                    </div>
+                </div>
+            </div> <!-- / .container-fluid -->
+
+            <!-- Footer-->
+            <!-- Footer -->
+            <footer class="mt-auto">
+                <div class="container-fluid mt-4 mb-6 text-muted">
+                    <div class="row justify-content-between">
+                        <div class="col">
+                            © Gabriel'angelo IK.
+                        </div>
+            
+                        <div class="col-auto">
+                            v1.0.0
+                        </div>
+                    </div> <!-- / .row -->
+                </div>
+            </footer>
+            
+        </main> <!-- / main -->
+
+<%-include('../inc/footer');-%>

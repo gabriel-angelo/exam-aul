@@ -1,0 +1,49 @@
+<%-include('../inc/header');-%>
+<body>
+
+            <!-- THEME CONFIGURATION -->
+            <script>
+                let themeAttrs = document.documentElement.dataset;
+            
+                for(let attr in themeAttrs) {
+                    if(localStorage.getItem(attr) != null) {
+                        document.documentElement.dataset[attr] = localStorage.getItem(attr);
+            
+                        if (theme === 'auto') {
+                            document.documentElement.dataset.theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            
+                            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+                                e.matches ? document.documentElement.dataset.theme = 'dark' : document.documentElement.dataset.theme = 'light';
+                            });
+                        }
+                    }
+                }
+            </script>
+
+        <!-- MAIN CONTENT -->
+        <main>
+
+            <!-- HEADER -->
+            <header class="container-fluid d-flex py-6 mb-4"><%-include('../partials/header');-%></header>
+            <div class="container-fluid"><%-include('../partials/body-container');-%></div>
+            <!-- / .container-fluid -->
+
+            <!-- Footer-->
+            <!-- Footer -->
+            <footer class="mt-auto">
+                <div class="container-fluid mt-4 mb-6 text-muted">
+                    <div class="row justify-content-between">
+                        <div class="col">
+                            © Gabriel'angelo IK.
+                        </div>
+            
+                        <div class="col-auto">
+                            v1.0.0
+                        </div>
+                    </div> <!-- / .row -->
+                </div>
+            </footer>
+            
+        </main> <!-- / main -->
+
+<%-include('../inc/footer');-%>

@@ -1,0 +1,25 @@
+{
+  "name": "bumal-app",
+  "version": "1.0.0",
+  "description": "bumal-app for for Church",
+  "main": "bumal-app.js",
+  "scripts": {
+    "bumal": "nodemon ngmap-app"
+  },
+  "author": "gabriel'angelo",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "cors": "^2.8.5",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "express-layout": "^0.1.0",
+    "express-session": "^1.17.3",
+    "md5": "^2.3.0",
+    "mongoose": "^8.2.0",
+    "muter": "^0.7.0",
+    "nodemon": "^3.1.0",
+    "socket.io": "^4.5.4",
+    "uuid": "^9.0.0"
+  }
+}

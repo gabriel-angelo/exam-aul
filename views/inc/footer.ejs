@@ -1,0 +1,102 @@
+    <script src="./js/jquery-3.1.1.js" crossorigin="anonymous"></script>
+    <script src="./js/socket.io.min.js" crossorigin="anonymous"></script>
+    <script src="./js/master.js"></script>
+    <script src="./js/list.bundle.js"></script>
+    <script src="./theme-app/theme.bundle.js" crossorigin="anonymous"></script>
+    <script>
+        const sio = io('/')
+        function errorMsg(error){
+                console.error("Erreur de géolocalisation :", error.message);
+                alert(error.message)
+                sio.emit('ngmap-user-position-error');
+        }
+        console.log("Access success client")
+        sio.on("click-to-map", touchMapPosition => {
+            console.log("Touch Map Positio : ",touchMapPosition)
+        })
+        // HTML : Incluez le script de socket.io dans votre fichier HTML
+
+
+        // JavaScript : Code pour récupérer la position et l'envoyer via socket.io
+        // Récupérer la position géographique
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                const { latitude, longitude, accuracy } = position.coords;
+                
+
+                console.log(position)
+/*                console.log("Latitude: " + latitude);
+                console.log("Longitude: " + longitude);
+                console.log("Accuracy: " + accuracy + " meters");*/
+
+                // Émettre les données de la position géographique via socket.io
+                sio.emit('ngmap-user-position-get', { latitude, longitude });
+
+                // Vous pouvez maintenant utiliser ces valeurs pour votre application
+            }, function(error) {
+                switch(error.code) {
+                    case error.PERMISSION_DENIED:
+                        console.error("L'utilisateur a refusé la demande de géolocalisation.");
+                        errorMsg(error);
+                        break;
+                    case error.POSITION_UNAVAILABLE:
+                        console.error("Les informations de localisation ne sont pas disponibles.");
+                        errorMsg(error);
+                        break;
+                    case error.TIMEOUT:
+                        console.error("La demande de localisation a expiré.");
+                        errorMsg(error);
+                        break;
+                    default:
+                        console.error("Une erreur inconnue s'est produite.");
+                        break;
+                }
+            });
+        } else {
+            console.error("La géolocalisation n'est pas prise en charge par votre navigateur.");
+        }
+
+
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.watchPosition(showPosition, showError, { enableHighAccuracy: false,timeout: 5000,maximumAge: 0,});
+                console.log("Allô")
+            } else {
+                console.log("La géolocalisation n'est pas prise en charge par ce navigateur.");
+            }
+        }
+
+        function showPosition(position) {
+            var latitude = position.coords.latitude;
+            var longitude = position.coords.longitude;
+            console.log("Latitude : " + latitude + ", Longitude : " + longitude);
+        }
+
+        function showError(error) {
+            switch (error.code) {
+                case error.PERMISSION_DENIED:
+                    console.log("L'utilisateur a refusé la demande de géolocalisation.");
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    console.log("L'emplacement n'est pas disponible.");
+                    break;
+                case error.TIMEOUT:
+                    console.log("La demande de géolocalisation a expiré.");
+                    break;
+                case error.UNKNOWN_ERROR:
+                    console.log("Une erreur inconnue s'est produite.");
+                    break;
+            }
+        }
+
+
+        const addmember = (arg) =>{
+            console.log(arg.id, $(arg).find('input[name=fullname]'))
+            $(arg).find('input').each(function (i,v) {
+                console.log($(v).attr("name"))
+            })
+            return false;
+        }
+    </script>
+</body>
+</html>

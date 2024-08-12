@@ -1,0 +1,89 @@
+<%-include('../inc/header');-%>
+
+<!-- THEME CONFIGURATION -->
+
+<body class="d-flex align-items-center bg-light-green">
+<script>
+    let themeAttrs = document.documentElement.dataset;
+
+    for(let attr in themeAttrs) {
+        if(localStorage.getItem(attr) != null) {
+            document.documentElement.dataset[attr] = localStorage.getItem(attr);
+
+            if (theme === 'auto') {
+                document.documentElement.dataset.theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+
+                window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+                    e.matches ? document.documentElement.dataset.theme = 'dark' : document.documentElement.dataset.theme = 'light';
+                });
+            }
+        }
+    }
+</script>
+<!-- MAIN CONTENT -->
+<main class="container">
+    <div class="row align-items-center justify-content-center vh-100">
+        <div class="col-11 col-sm-8 col-md-6 col-lg-5 col-xl-4 col-xxl-3 py-6">
+
+            <!-- Title -->
+            <h1 class="mb-2 text-center">
+                Connectez-vous
+            </h1>
+
+            <!-- Subtitle -->
+            <p class="text-secondary text-center">
+                Entrez votre numéro de tél. Staff pour s'authentifier
+            </p>
+
+            <!-- Form -->
+            <form action="/" method="POST">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="mb-4">
+
+                            <!-- Label -->
+                            <label class="form-label">
+                                Pseudo / Phone
+                            </label>
+
+                            <!-- Input -->
+                            <input type="text" name="login" class="form-control" placeholder="Votre Pseudo ou num. de tél.">
+                        </div>
+
+                        <div class="mb-4">
+
+                            <!-- Label -->
+                            <label class="form-label">
+                                Mot de passe
+                            </label>
+
+                            <!-- Input -->
+                            <input type="text" name="password" class="form-control" placeholder="Votre mot de passe">
+                        </div>
+                    </div>
+                </div> <!-- / .row -->
+
+                <div class="form-check">
+
+                    <!-- Input -->
+                    <input type="checkbox" class="form-check-input" id="remember">
+
+                    <!-- Label -->
+                    <label class="form-check-label" for="remember">
+                        Se souvenir de moi
+                    </label>
+                </div>
+
+                <div class="row align-items-center text-center">
+                    <div class="col-12">
+
+                        <!-- Button -->
+                        <button type="submit" class="btn w-100 btn-primary mt-6 mb-2">Connexion</button>
+                    </div>
+                </div> <!-- / .row -->
+            </form>
+        </div>
+    </div> <!-- / .row -->
+</main> <!-- / main -->
+</body>
+</html>

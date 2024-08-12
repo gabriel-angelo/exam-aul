@@ -1,0 +1,67 @@
+
+
+<div class="d-flex align-items-baseline justify-content-between">
+
+    <!-- Title -->
+    <h1 class="h2 d-flex align-items-center justify-content-between">
+        <span>
+            Renseignement <span class="h6">(Fideles de l'église)</span>
+            <button type="button" class="btn btn-sm btn-primary ms-4 p-0 h-30px w-30px rounded-circle cls-rens-user" data-bs-toggle="modal" data-bs-target="#reseignPerson" id="btnAddTask"><i class="ti ti-user-plus"></i></button>
+        </span>
+    </h1>
+</div>
+
+<div class="row"><%-include('./user-info-list');-%></div>
+
+<div id="reseignPerson" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="reseignPersonTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="reseignPersonTitle">Renseignement du fidele</h3>
+                <button type="button" class="btn-close cls-close-user-info" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="cls-form-user-info">
+                <div class="modal-body row">
+
+                    <label for="basic-url" class="form-label">Nom complet</label>
+                    <div class="input-group mb-4 cls-fullname">
+                        <span class="input-group-text"><i class="ti ti-info-square"></i></span>
+                        <input type="text" name="name" id="id-name" class="form-control" placeholder="Nom" aria-label="Nom">
+                        <input type="text" name="lastname" id="id-lastname" class="form-control" placeholder="Post-nom" aria-label="Post-nom">
+                        <input type="text" name="firstname" id="id-firstname" class="form-control" placeholder="Prenom" aria-label="Prenom">
+                    </div>
+
+                    <label for="basic-url" class="form-label">Adresse complète</label>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon3"> n°01, av. assoba, q/Sans fils</span>
+                        <input type="text" name="address" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                        <span class="input-group-text"><i class="ti ti-home-cog"></i></span>
+                    </div>
+
+                    <div class="cls-container-contact-user">
+                        <div class="input-group mb-3 cls-contact-user">
+                            <span class="input-group-text" id="cls-user-phone"><i class="ti ti-phone"></i> (081-xx-xx-xxx)</span>
+                            <input type="phone" name="contact" class="form-control" placeholder="Ajouter un autre numéro tél." aria-label="Phone" aria-describedby="cls-user-phone">
+                            <span class="input-group-text text-primary" id="basic-addon2" onclick="cloneContactUser()"><i class="ti ti-phone-plus"></i></span>
+                        </div>
+                    </div>
+                    
+                    <div class="col-12 mt-20">
+                        <div class="form-check">
+                            <input class="form-check-input" name="isMember" type="checkbox" id="invalidCheck">
+                            <label class="form-check-label" for="invalidCheck">
+                                Je suis membre et fidèle rattaché à l'église
+                            </label>
+                        </div>
+                    </div>
+                    <br><br><br><br><br><br>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Quitter</button>
+                    <button type="submit" class="btn btn-primary">Enregistrer</button>
+                </div>
+            </form>
+            
+        </div>
+    </div>
+</div>

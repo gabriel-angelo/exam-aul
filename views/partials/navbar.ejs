@@ -1,0 +1,9 @@
+<nav class="navbar navbar-light bg-light">
+    <div class="container">
+        <h2> <span class="icon icon-stack">Manager connexion</h2>
+        <b class="icon"><span class="icon icon-user"> Auth ID : <%= locals.userSession ? locals.userSession.fullname : "----No disponible----"  %></b>
+    </div>
+    <%if (locals.userSession){%>
+    <a id="btn-logout" href="user/logout"><span class="icon icon-exit"></a>
+    <%}%>
+</nav>
