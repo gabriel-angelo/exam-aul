@@ -1,4 +1,4 @@
-const {createUser, getUserAll} = require("../models/user-client"),
+const {createUser, getUserAll, findUser, editUser, deleteUser} = require("../models/user-client"),
   md5 = require("md5");
 
 exports.newUser = async (req, res) => {
@@ -27,3 +27,43 @@ exports.getUserAll = async (req, res) => {
     console.log(error);
   }
 }
+
+exports.getUserOne = async (req, res) => {
+  try {
+    const {id}=req.query
+    await findUser(id).then(data =>{
+      return res.json({ flash:'succMsg', descript: "Recherche réussie avec succès", data })
+    })
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+exports.editUser = async (req, res) => {
+  const user=req.body
+  const contact = req.body["contact"]
+  delete req.body["contact"]
+  user.contact = contact.join(",")
+  try {
+    await editUser(user).then(data =>{
+      console.log(data);
+      
+      return res.json({ flash:'succMsg', descript: "Identité modifiée", data })
+    })
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+exports.deleteUser = async (req, res) => {
+  const {id} = req.body
+  
+  try {
+    await deleteUser(id).then(data =>{
+      return res.json({ flash:'succMsg', descript: "Identité modifiée", data:id })
+    })
+  } catch (error) {
+    console.log(error);
+  }
+}
+

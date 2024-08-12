@@ -52,5 +52,5 @@ io.on('connection', socket => {
 })
 
 server.listen(PORT, () => {
-	console.log(`Server running on port ${PORT} to bumal-app`)
+	console.log(`Server running on port ${PORT} to ual-app`)
 })

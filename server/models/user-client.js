@@ -23,7 +23,7 @@ exports.createUser = async (userData) => {
 
 exports.findUser = async (userData) => {
     try {
-        return await users.findOne(userData);
+        return await users.findById(userData);
     } catch (error) {
         console.log(error);
     }
@@ -36,6 +36,29 @@ exports.getUserAll = async () => {
         console.log(error);
     }
 }
+
+exports.editUser = async (userData) => {
+    const id = userData.id
+    delete userData.id
+    console.log(id);
+    
+    try {
+        await users.updateOne({id},{$set:userData});
+        return await users.findById(id);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+exports.deleteUser = async (id) => {
+    
+    try {
+        await users.deleteOne({id});
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 
 exports.usersNoMe = async (userData) => {
     try {
