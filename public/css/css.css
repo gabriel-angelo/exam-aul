@@ -14,4 +14,11 @@
 .cls-contact-user span[class*="text-"], .cls-tr-contact-user span[class*="text-"]{
   cursor: pointer;
 }
+#container-master{
+  background-image:url("../img/logo/bg.jpg");
+}
+.container-master{
+  background-color: rgb(255,240,255,0.5);
+  border-radius: 2%;
+}
 

@@ -1,0 +1,178 @@
+<%-include('../inc/header');-%>
+<script>
+    var userStudent;
+        <%if(locals._USER_STUDIANT){%>
+             userStudent = '<%=_USER_STUDIANT._id%>'
+        <%}else{%>
+            userStudent = null
+        <%}%>
+        console.log("User :", userStudent);
+        
+</script>
+<body>
+
+    <!-- THEME CONFIGURATION -->
+    <script>
+        let themeAttrs = document.documentElement.dataset;
+
+        for (let attr in themeAttrs) {
+            if (localStorage.getItem(attr) != null) {
+                document.documentElement.dataset[attr] = localStorage.getItem(attr);
+
+                if (theme === 'auto') {
+                    document.documentElement.dataset.theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+
+                    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+                        e.matches ? document.documentElement.dataset.theme = 'dark' : document.documentElement.dataset.theme = 'light';
+                    });
+                }
+            }
+        }
+    </script>
+
+    <!-- MAIN CONTENT -->
+    <main>
+
+        <!-- HEADER -->
+        <header class="container-fluid d-flex py-6 mb-4"><%-include('../partials/header');-%></header>
+        <div class="container-fluid">
+            <div class="d-flex align-items-baseline justify-content-between">
+
+                <!-- Title -->
+                <h1 class="h2 d-flex">
+                    Facturation
+                </h1>
+
+            </div>
+
+
+            <!-- Card -->
+            <div class="card border-0">
+                <div class="card-body">
+                    <div class="row justify-content-between">
+                        <div class="col-md-7 col-xl-6 col-xxl-5">
+                            <img src="./img/logo/lau-logo.jfif"
+                                alt="..." class="mb-7" width="125" height="100">
+
+                            <div>
+                                <p>N° Facture : #PO-AC-002931 <br>
+                                    Date de : <%=_USER_STUDIANT._id%> <br>
+                                    Concerné(e) : <%=_USER_STUDIANT.name.toUpperCase()%> <%=_USER_STUDIANT.lastname.toUpperCase()%> <%=_USER_STUDIANT.firstname%> <br>
+                                    Classe : L2 FSI PM<br>
+                                    Session : 2023-2024</p>
+                            </div>
+                        </div>
+                        <div class="col-auto text-md-end">
+                            <p class="fw-bold">Leadership Academia University<br>4963, av. TOMBALBAY<br>GOLF, KIN-GOMBE<br>DR Congo
+                                States</p>
+                            <img src="https://d33wubrfki0l68.cloudfront.net/5d64e2526a24cc1eb3b36829f3292335b815596c/3a5fd/assets/images/printscreens/qr.svg"
+                                width="95" height="95" class="img-fluid" alt="...">
+                        </div>
+                    </div> <!-- / .row -->
+
+                    <!-- Divider -->
+                    <hr>
+
+                    <div class="row justify-content-between">
+                        <div class="col col-lg-auto fw-semibold mb-5">
+                            
+                        </div>
+
+                        <div class="col col-lg-auto text-end">
+                            <span class="text-secondary">Solde actuel ($)</span>
+                            <h3 class="display-2 mb-6">$4,920.00</h3>
+
+                            <span class="text-secondary">Status actuel</span><br>
+                            <span class="badge text-bg-danger-soft fs-6 fw-bold mb-6 p-2">En dette</span>
+                        </div>
+                    </div> <!-- / .row -->
+
+                    <div class="row">
+                        <div class="col">
+
+                            <!-- Table -->
+                            <div class="table-responsive">
+                                <table class="table align-middle table-nowrap mb-0">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th scope="col" class="w-60px">#</th>
+                                            <th scope="col">n° Facture</th>
+                                            <th scope="col">date</th>
+                                            <th class="text-end">montant($)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Design UX and UI in Sketch format, 5 pages with two versions</td>
+                                            <td>$60.00</td>
+                                            <td class="text-end">$1,320.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>SEO and Accessibility Improvements</td>
+                                            <td>$60.00</td>
+                                            <td class="text-end">$720.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Website development (static version using HTML, CSS and JS)</td>
+                                            <td>$60.00</td>
+                                            <td class="text-end">$2,700.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td>5</td>
+                                            <td>SMTP setup</td>
+                                            <td>$60.00</td>
+                                            <td class="text-end">$120.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="border-0">4</td>
+                                            <td class="border-0">Staging and live environment</td>
+                                            <td class="border-0">$60.00</td>
+                                            <td class="border-0 text-end">$60.00</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div> <!-- / .table-responsive -->
+                        </div>
+                    </div> <!-- / .row -->
+                </div>
+
+                <div class="card-footer">
+                    <div class="row align-items-end">
+                        <div class="col mb-5 mb-md-0">
+                            <small class="text-secondary">If you have any questions, please let us know.</small>
+                        </div>
+
+                        <div class="col-md-auto">
+
+                            <!-- Button -->
+                            <button type="button" data-bs-toggle="modal" data-bs-target="#paiePerson" class="btn btn-primary ms-2">Paie facture</button>
+                        </div>
+                    </div> <!-- / .row -->
+                </div>
+            </div>
+        </div> <!-- / .container-fluid -->
+
+        <%-include('../partials/paie-invoice');-%>
+
+        <!-- Footer-->
+        <!-- Footer -->
+        <footer class="mt-auto">
+            <div class="container-fluid mt-4 mb-6 text-muted">
+                <div class="row justify-content-center">
+                    <div class="col">
+                        © Gabriel'angelo IK.
+                    </div>
+
+                    <div class="col-auto">
+                        v1.0.0
+                    </div>
+                </div> <!-- / .row -->
+            </div>
+        </footer>
+    </main>
+
+    
+<%-include('../inc/footer');-%>

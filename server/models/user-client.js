@@ -38,22 +38,19 @@ exports.getUserAll = async () => {
 }
 
 exports.editUser = async (userData) => {
-    const id = userData.id
+    const _id = userData.id
     delete userData.id
-    console.log(id);
-    
     try {
-        await users.updateOne({id},{$set:userData});
-        return await users.findById(id);
+        return users.updateOne({_id},{$set:userData});
+        
     } catch (error) {
         console.log(error);
     }
 }
 
-exports.deleteUser = async (id) => {
-    
+exports.deleteUser = async (_id) => {
     try {
-        await users.deleteOne({id});
+        await users.deleteOne({_id});
     } catch (error) {
         console.log(error);
     }

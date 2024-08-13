@@ -21,9 +21,9 @@
     }
 </script>
 <!-- MAIN CONTENT -->
-<main class="container">
+<main class="container-fluid" id="container-master">
     <div class="row align-items-center justify-content-center vh-100">
-        <div class="col-11 col-sm-8 col-md-6 col-lg-5 col-xl-4 col-xxl-3 py-6">
+        <div class="col-11 col-sm-8 col-md-6 col-lg-5 col-xl-4 col-xxl-3 py-6 p-4 container-master">
 
             <!-- Title -->
             <h1 class="mb-2 text-center">
@@ -32,7 +32,7 @@
 
             <!-- Subtitle -->
             <p class="text-secondary text-center">
-                Entrez votre numéro de tél. Staff pour s'authentifier
+                Entrez votre pseudo et mot de passe pour s'authentifier
             </p>
 
             <!-- Form -->
@@ -43,11 +43,11 @@
 
                             <!-- Label -->
                             <label class="form-label">
-                                Pseudo / Phone
+                                Pseudo
                             </label>
 
                             <!-- Input -->
-                            <input type="text" name="login" class="form-control" placeholder="Votre Pseudo ou num. de tél.">
+                            <input type="text" name="login" class="form-control" placeholder="Votre Pseudo .">
                         </div>
 
                         <div class="mb-4">
@@ -62,17 +62,6 @@
                         </div>
                     </div>
                 </div> <!-- / .row -->
-
-                <div class="form-check">
-
-                    <!-- Input -->
-                    <input type="checkbox" class="form-check-input" id="remember">
-
-                    <!-- Label -->
-                    <label class="form-check-label" for="remember">
-                        Se souvenir de moi
-                    </label>
-                </div>
 
                 <div class="row align-items-center text-center">
                     <div class="col-12">

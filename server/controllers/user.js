@@ -1,3 +1,4 @@
+const {invoiceUser} = require("../models/paie")
 const {createUser, getUserAll, findUser, editUser, deleteUser} = require("../models/user-client"),
   md5 = require("md5");
 
@@ -30,7 +31,12 @@ exports.getUserAll = async (req, res) => {
 
 exports.getUserOne = async (req, res) => {
   try {
-    const {id}=req.query
+    let {id}=req.query
+    if (res.checkupdate) {
+      console.log("Apdate check user",res.checkupdate);
+      id = res.checkupdate
+    }
+    
     await findUser(id).then(data =>{
       return res.json({ flash:'succMsg', descript: "Recherche réussie avec succès", data })
     })
@@ -39,17 +45,17 @@ exports.getUserOne = async (req, res) => {
   }
 }
 
-exports.editUser = async (req, res) => {
+exports.editUser = async (req, res, next) => {
   const user=req.body
+  
   const contact = req.body["contact"]
   delete req.body["contact"]
   user.contact = contact.join(",")
   try {
-    await editUser(user).then(data =>{
-      console.log(data);
-      
-      return res.json({ flash:'succMsg', descript: "Identité modifiée", data })
-    })
+    const id = user.id
+    const updateUser = await editUser(user)
+     res.checkupdate = id
+     next();
   } catch (error) {
     console.log(error);
   }
@@ -66,4 +72,3 @@ exports.deleteUser = async (req, res) => {
     console.log(error);
   }
 }
-

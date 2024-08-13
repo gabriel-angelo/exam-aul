@@ -1,0 +1,27 @@
+<div id="paiePerson" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="paiePersonTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="paiePersonTitle">Paiement du frais académique</h3>
+                <button type="button" class="btn-close cls-close-user-info" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="cls-form-user-paie">
+                <div class="modal-body row">
+
+                    <label for="basic-url" class="form-label">Montant à payer</label>
+                    <div class="input-group mb-4 cls-fullname">
+                        <input type="number" name="amount" min="1" max="2000" id="amount" class="form-control" placeholder="montant" aria-label="amount">
+                        <input type="hidden" name="user" value="<%=_USER_STUDIANT._id%>">
+                        <span class="input-group-text">($)</span>
+                    </div>
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Quitter</button>
+                    <button type="submit" class="btn btn-primary" title="edit user">Payer</button>
+                </div>
+            </form>
+            
+        </div>
+    </div>
+</div>
