@@ -20,6 +20,7 @@ $(() => {
 
 
     function guiUserInfo (user) {
+        
         return `<tr class="cls-tr-contact-user" id="${user._id}">
             <td>
                 <div class="form-check mb-0">
@@ -28,14 +29,14 @@ $(() => {
             </td>
             <td>
                 <div class="avatar avatar-circle avatar-xs me-2">
-                    <img src="https://d33wubrfki0l68.cloudfront.net/ea01948f5a48922378b407c27d2b4e5809ed4949/35ecd/assets/images/profiles/profile-11.jpeg" alt="..." class="avatar-img" width="30" height="30">
+                    <img src="./img/logo/user-avatar-account.jpg" alt="..." class="avatar-img" width="30" height="30">
                 </div>
                 <span class="name fw-bold">${(user.name +" "+ user.lastname).toUpperCase() +" "+ user.firstname}</span>
             </td>
             <td class="email">${user.contact}</td>
             <td class="id">${user.address}</td>
-            <td class="date" data-signed="1635289200">${user.isMember=="on"?"ok":"no"}</td>
-            <td><span class="text-info" onclick="editContactUser()"><i class="ti ti-user-edit"></i></span></td>
+            <td><span class="text-info" id="${user._id}" data-bs-toggle="modal" onclick="editChecktUser(this)" data-bs-target="#editPerson"><i class="ti ti-user-edit"></i></span></td>
+            <td><span class="text-danger" id="${user._id}" onclick="deletetUser(this)"><i class="ti ti-trash"></i></span></td>
         </tr>`;
     }
     
@@ -63,6 +64,17 @@ $(() => {
         return $(arg).parent(".cls-contact-user").remove();
     };
 
+    editChecktUser = (arg)=>{
+        const id=arg.id
+        ajaxServer("GET", `/user-get-one`, {id}, feedbackgetUser);
+    }
+
+    deletetUser = (arg)=>{
+        const id=arg.id
+        console.log("DELETE ");
+        ajaxServer("DELETE", `/user-delete`, {id}, feedbackdeleteUser);
+    }
+
     cloneContactUser = () => {
         const contactUserField = `<div class="input-group mb-3 cls-contact-user">
             <span class="input-group-text" id="cls-user-phone"><i class="ti ti-phone"></i> (081-xx-xx-xxx)</span>
@@ -76,19 +88,61 @@ $(() => {
 
     function feedbackNewUser(res) {
         const user = res.data
-        
-        console.log("Click sur fin", res);
         $("form#cls-form-user-info")[0].reset();
         $(`.cls-close-user-info`).click();
         $(`.cls-user-fields-contact`).append(guiUserInfo(user));
     }
 
-    $("form#cls-form-user-info").on("submit", function (e) {
+    function feedbackdeleteUser(res) {
+        const id=res.data
+        $(`table .cls-user-fields-contact tr#${id}`).remove();
+    }
+
+    function feedbackgetUser(res) {
+        const user = res.data
+        console.log(res.data);
+        
+        $("#cls-form-user-edit ").attr("title",user._id)
+        $("#cls-form-user-edit #id-name").val(user.name)
+        $("#cls-form-user-edit #id-lastname").val(user.lastname)
+        $("#cls-form-user-edit #id-firstname").val(user.firstname)
+        $("#cls-form-user-edit input[name=address]").val(user.address)
+        $("#cls-form-user-edit input[name=contact]").val(user.contact)
+    }
+
+    function feedbackEditUser(res) {
+        const user = res.data
+        console.log("fEED BACK",user);
+        
+        
+        $(`table .cls-user-fields-contact tr#${user._id}`).css('background','red');
+        setTimeout(function () {
+            $(`table .cls-user-fields-contact tr#${user._id}`).replaceWith("guiUserInfo(user)");
+          //  $(`table .cls-user-fields-contact tr#${user._id}`).css('background','initial');
+        }, 2000);
+        //$(`table .cls-user-fields-contact tr#${user._id}`).replaceWith(guiUserInfo(user));
+        //
+        
+    }
+
+    $("form").on("submit", function (e) {
         e.preventDefault();
         const oData = new FormData(this);
         const user = Object.fromEntries(oData.entries());
         user.contact = oData.getAll("contact");
+        
+        if(this.id == "cls-form-user-edit") {
+            console.log("EDITION")
+            user.id = this.title
+            ajaxServer("PUT", `/user-form-edit`, user, feedbackEditUser);
+        }
 
-        ajaxServer("POST", `/user-form-add`, user, feedbackNewUser);
+        if(this.id == "cls-form-user-add"){
+            console.log("ADDITION");
+            ajaxServer("POST", `/user-form-add`, user, feedbackNewUser);
+        }
+        
+        $("form#"+this.id)[0].reset();
+        $(`.cls-close-user-info`).click();
     });
 });
